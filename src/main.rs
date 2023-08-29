@@ -38,19 +38,19 @@ fn main() {
             .expect("failed to execute process");
         println!("stdout: {}", String::from_utf8_lossy(&output.stdout));
         println!("stderr: {}", String::from_utf8_lossy(&output.stderr));
-    }else if input.trim() == "repos" {
+    }else if input.trim() == "commits" {
         // run a python file while passing in the gitapikey// also repeating the same code for the other else if statements
         println!("Please enter your git api key");
         io::stdin().read_line(&mut gitapikey).unwrap();
 
         let output = std::process::Command::new("python")
-            .arg("src/profiles.py")
+            .arg("src/commits.py")
             .arg(gitapikey.trim())
             .output()
             .expect("failed to execute process");
         println!("stdout: {}", String::from_utf8_lossy(&output.stdout));
         println!("stderr: {}", String::from_utf8_lossy(&output.stderr));
-    }else if input.trim() == "repos" {
+    }else if input.trim() == "profiles" {
         // run a python file while passing in the gitapikey// also repeating the same code for the other else if statements
         println!("Please enter your git api key");
         io::stdin().read_line(&mut gitapikey).unwrap();
@@ -63,14 +63,16 @@ fn main() {
         println!("stdout: {}", String::from_utf8_lossy(&output.stdout));
         println!("stderr: {}", String::from_utf8_lossy(&output.stderr));
     }
-    else if input.trim() == "repos" {
+    else if input.trim() == "projects" {
         // run a python file while passing in the gitapikey// also repeating the same code for the other else if statements
-        println!("Please enter your git api key");
-        io::stdin().read_line(&mut gitapikey).unwrap();
+        
+        println!("Please enter the organisation you want to search for");
+        io::stdin().read_line(&mut organisation).unwrap();
 
         let output = std::process::Command::new("python")
-            .arg("src/profiles.py")
-            .arg(gitapikey.trim())
+            .arg("src/projects.py")
+            
+            .arg(organisation.trim())
             .output()
             .expect("failed to execute process");
         println!("stdout: {}", String::from_utf8_lossy(&output.stdout));
@@ -79,5 +81,6 @@ fn main() {
         
      else {
         println!("I didn't understand that.");
+        main()
     }
 }
